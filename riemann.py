@@ -12,25 +12,23 @@ def hello_world(name=''):
     return
 
 #Implement the Riemann Sum approximation for integrals.
-def riemann(func, bounds, nb = 10):
+def doRiemann(func, bounds, nb = 10):
     s = 0.0
     x = 0.0
     a, b = bounds
-    u = b
-    if b > a :
-        step = (b - a) / float(nb)
-        x = a + step
-    else :
-        step = (a - b) / float(nb)
-        x = b + step
-        u = a
-    while x < u:
+    step = (b - a) / float(nb)
+    x = a + step
+    while x < b:
         s += func(x) * step
         x += step
+    return s
+
+def riemann(func, bounds, nb = 10):
+    a, b = bounds
     if b > a :
-        return s
+        return doRiemann(func, bounds, nb)
     else :
-        return -s
+        return -doRiemann(func, (b, a), nb)
 
 # test
 def quadratic(x):
