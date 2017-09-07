@@ -14,13 +14,23 @@ def hello_world(name=''):
 #Implement the Riemann Sum approximation for integrals.
 def riemann(func, bounds, nb = 10):
     s = 0.0
+    x = 0.0
     a, b = bounds
-    step = (b - a) / float(nb)
-    x = a + step
-    while x < b:
+    u = b
+    if b > a :
+        step = (b - a) / float(nb)
+        x = a + step
+    else :
+        step = (a - b) / float(nb)
+        x = b + step
+        u = a
+    while x < u:
         s += func(x) * step
         x += step
-    return s
+    if b > a :
+        return s
+    else :
+        return -s
 
 # test
 def quadratic(x):
